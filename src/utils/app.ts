@@ -4,6 +4,7 @@ import path from 'path';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import routes from '../routes';
+import { VercelRequest, VercelResponse } from '@vercel/node';
 
 type SwaggerRequest = {
   headers: Record<string, string>;
@@ -187,3 +188,7 @@ app.listen(8081, () => {
   console.log('Server running on port 8081');
   console.log('Swagger docs available at http://localhost:8081/api-docs');
 });
+
+export default function handler(req: VercelRequest, res: VercelResponse) {
+  res.status(200).json({ message: 'Serverless function is working!' });
+}
